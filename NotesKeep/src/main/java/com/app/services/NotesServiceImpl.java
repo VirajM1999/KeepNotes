@@ -44,17 +44,18 @@ public class NotesServiceImpl implements NotesService {
 		Notes newNote = new Notes(
 			newnote.getTitle(),
 			newnote.getDescription(),
-			LocalDateTime.parse(newnote.getCreationTimestamp(), DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")),
+			LocalDateTime.parse(LocalDateTime.now().toString().replace('T',' ').substring(0, 19), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
 			user
 		);
 		
 		try {
 			notesrepo.save(newNote);
 			response = mapper.map(user, ResponseApi.class);
-			response.setMessage("Notes added successfully");
+			response.setUserid(user.getId());
+			response.setMessage("Note added successfully");
 			response.setStatuscode(200);
 		} catch (Exception e) {
-			response.setMessage("Notes adddition failed");
+			response.setMessage("Something went wrong.");
 			response.setStatuscode(400);
 		}
 		return response;

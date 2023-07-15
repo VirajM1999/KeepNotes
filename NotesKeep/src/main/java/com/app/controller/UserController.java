@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +30,7 @@ public class UserController {
 	public ResponseApi addNewUser(@RequestBody User newuser){
 			return (userservice.addnewuser(newuser));
 	}
-	@PutMapping("/updateuserdetails")
+	@PostMapping("/updateuserdetails")
 	public ResponseApi updateUser(@RequestBody Userdto updateuser) {
 		return (userservice.updateUser(updateuser));
 	}
@@ -40,6 +39,7 @@ public class UserController {
 	public ResponseApi userLogin(@RequestBody  LoginDto user) {
 		return userservice.loginuser(user);
 	}
+	
 	@GetMapping("/notelist/{userId}")
 	public List<Notes> getNoteList(@PathVariable Integer userId){
 		return userservice.getnotelist(userId);

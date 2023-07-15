@@ -1,9 +1,8 @@
 package com.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +15,7 @@ import com.app.services.NotesService;
 
 @RestController
 @RequestMapping("/notes")
+@CrossOrigin(origins = "http://localhost:3000/")
 public class NotesController {
 	
 	@Autowired
@@ -26,12 +26,12 @@ public class NotesController {
 			return (notesservice.addnewNotes(newnote));
 	}
 	
-	@PutMapping("/updatenotes")
+	@PostMapping("/updatenotes")
 	public ResponseApi updateNotes(@RequestBody NotesUpdateDto updatenote) {
 		return (notesservice.updateNotes(updatenote));
 	}
 	
-	@DeleteMapping("/deletenotes")
+	@PostMapping("/deletenotes")
 	public ResponseApi deletenotes(@RequestBody NotedeleteDto deletenote ) {
 		return (notesservice.deletenotes(deletenote));
 	} 
